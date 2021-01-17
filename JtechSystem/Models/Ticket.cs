@@ -14,5 +14,15 @@ namespace JtechSystem.Models
         public DateTime Created { get; set; }
         public DateTime Closed { get; set; }
         public TicketStatus Status { get; set; }
+
+        public Ticket(int ticketId, string assunto, string descricao, DateTime created, DateTime closed, TicketStatus status)
+        {
+            TicketId = ticketId;
+            Assunto = assunto;
+            Descricao = descricao;
+            Created = created;
+            Closed = closed;
+            Status = status;
+        }
     }
 }
