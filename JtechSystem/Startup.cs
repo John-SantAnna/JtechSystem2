@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using JtechSystem.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace JtechSystem
 {
@@ -29,6 +30,9 @@ namespace JtechSystem
 
             services.AddDbContext<JtechSystemContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("JtechSystemContext")));
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(o => o.LoginPath = new Microsoft.AspNetCore.Http.PathString("/account/login"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +52,8 @@ namespace JtechSystem
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

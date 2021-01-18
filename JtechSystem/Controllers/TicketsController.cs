@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using JtechSystem.Data;
 using JtechSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JtechSystem.Controllers
 {
@@ -19,12 +20,14 @@ namespace JtechSystem.Controllers
             _context = context;
         }
 
+        [Authorize]
         // GET: Tickets
         public async Task<IActionResult> Index()
         {
             return View(await _context.Ticket.ToListAsync());
         }
 
+        [Authorize]
         // GET: Tickets/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -43,6 +46,7 @@ namespace JtechSystem.Controllers
             return View(ticket);
         }
 
+        [Authorize]
         // GET: Tickets/Create
         public IActionResult Create()
         {
@@ -52,6 +56,7 @@ namespace JtechSystem.Controllers
         // POST: Tickets/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("TicketId,Assunto,Descricao,Created,Closed,Status")] Ticket ticket)
@@ -65,6 +70,7 @@ namespace JtechSystem.Controllers
             return View(ticket);
         }
 
+        [Authorize]
         // GET: Tickets/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -84,6 +90,7 @@ namespace JtechSystem.Controllers
         // POST: Tickets/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("TicketId,Assunto,Descricao,Created,Closed,Status")] Ticket ticket)
@@ -116,6 +123,7 @@ namespace JtechSystem.Controllers
             return View(ticket);
         }
 
+        [Authorize]
         // GET: Tickets/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -135,6 +143,7 @@ namespace JtechSystem.Controllers
         }
 
         // POST: Tickets/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -11,6 +11,7 @@ namespace JtechSystem.Models
         public string Name { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
+        public bool RememberMe { get; set; }
 
         public User(int id, string name, string login, string password)
         {
